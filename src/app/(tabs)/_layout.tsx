@@ -14,18 +14,18 @@ const TabLayout = () => {
   );
   const topRatedMovies = data as TopRatedMovies | undefined;
 
-  // useEffect(() => {
-  //   if (
-  //     !fetching &&
-  //     topRatedMovies?.results?.length &&
-  //     setState
-  //   ) {
-  //     setState({
-  //       topTenMovies: topRatedMovies.results.slice(0, 9),
-  //       topRatedMovies: topRatedMovies?.results,
-  //     });
-  //   }
-  // }, [fetching]);
+  useEffect(() => {
+    if (
+      !fetching &&
+      topRatedMovies?.results?.length &&
+      setState
+    ) {
+      setState({
+        topTenMovies: topRatedMovies.results.slice(0, 10),
+        topRatedMovies: topRatedMovies?.results,
+      });
+    }
+  }, [fetching]);
 
   const renderTabBarIcon = (
     focused: boolean,
