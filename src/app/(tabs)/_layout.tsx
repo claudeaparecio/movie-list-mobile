@@ -5,13 +5,10 @@ import { TabBarIcon } from "@/src/components/common/tab-bar-icon.component";
 import { defaultColors, defaultFont } from "@/src/constants/styles";
 import { StateContext } from "@/src/context/state-context";
 import { useTopRatedMovies } from "@/src/hooks/useTopRatedMovies";
-import { topRatedMoviesUrl } from "@/src/constants/request-urls";
 
 const TabLayout = () => {
   const { page, setState } = useContext(StateContext);
-  const { isLoading: fetching, data, error } = useTopRatedMovies(
-    `${topRatedMoviesUrl}&page=${page}`
-  );
+  const { isLoading: fetching, data, error } = useTopRatedMovies(page);
   const topRatedMovies = data as TopRatedMovies | undefined;
 
   useEffect(() => {
@@ -21,8 +18,7 @@ const TabLayout = () => {
       setState
     ) {
       setState({
-        topTenMovies: topRatedMovies.results.slice(0, 10),
-        topRatedMovies: topRatedMovies?.results,
+        topRatedMovies: topRatedMovies,
       });
     }
   }, [fetching]);

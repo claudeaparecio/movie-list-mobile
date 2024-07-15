@@ -10,6 +10,7 @@ const Container = styled.View`
 `;
 
 const ContentContainer = styled.View`
+  height: 100%;
 `;
 
 type ScreenContainerProps = {

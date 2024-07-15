@@ -1,23 +1,48 @@
-import ScreenContainer from "@/src/components/common/screen-container.component";
-import HeroHeader from "@/src/components/home/hero-header.component";
-import { useContext } from "react";
-import { StateContext } from "@/src/context/state-context";
-import styled from "styled-components/native";
-import { defaultColors } from "@/src/constants/styles";
+import { useContext, useEffect, useState } from "react";
 
-const Header = styled.Text`
-  font-size: 20px;
-  font-family: RobotoBlack;
-  color: ${defaultColors.kodamaWhite};
-`;
+import ScreenContainer from "@/src/components/common/screen-container.component";
+import { StateContext } from "@/src/context/state-context";
+import Home from "@/src/components/home/home.component";
+import { useTopRatedMovies } from "@/src/hooks/useTopRatedMovies";
 
 const HomeScreen = () => {
-  const { topTenMovies } = useContext(StateContext);
+  const { topRatedMovies, setState } = useContext(StateContext);
+  const topTenMovies = topRatedMovies?.results?.slice(0, 10) ?? [];
+  const movies = topRatedMovies?.results?.slice(10);
+  const { nextPage, isLoading, data } = useTopRatedMovies();
+
+  const loadMore = () => {
+    const page = topRatedMovies?.page ?? 1;
+    nextPage(page + 1);
+  };
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (
+        setState &&
+        topRatedMovies?.results &&
+        topRatedMovies?.results?.length > 0 &&
+        data?.results &&
+        data?.results?.length > 0
+      ) {
+        setState({
+          topRatedMovies: {
+            ...data,
+            results: [...topRatedMovies?.results, ...data?.results],
+          },
+        });
+      }
+    }
+  }, [isLoading]);
 
   return (
     <ScreenContainer>
-      <Header>TOP 10 RATED MOVIES</Header>
-      <HeroHeader topTenMovies={topTenMovies} />
+      <Home
+        loadMore={loadMore}
+        loadingMore={isLoading}
+        movies={movies}
+        topTenMovies={topTenMovies}
+      />
     </ScreenContainer>
   );
 };

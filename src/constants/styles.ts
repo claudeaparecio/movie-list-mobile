@@ -14,6 +14,7 @@ export const defaultColors = {
   kodamaWhite: '#E6F1FC',
   electronBlue: '#6BACEE',
   grayChateau: '#A8AAAB',
+  ligthGreen: '#36D07A',
 };
 
 export const defaultFont = {

@@ -1,7 +1,6 @@
 interface State {
   page?: number;
-  topTenMovies?: TopRatedMovie[];
-  topRatedMovies?: TopRatedMovie[];
+  topRatedMovies?: TopRatedMovies;
   favoritesMovies?: any[];
   searchResults?: any[];
 }
