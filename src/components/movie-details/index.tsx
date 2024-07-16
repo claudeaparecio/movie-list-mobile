@@ -212,7 +212,10 @@ const MovieDetails = ({ movie, cast }: MovieDetailsProps) => {
         x: 0.5,
         y: 0.5,
       }}
-      style={linearGradientStyle}
+      style={{
+        ...linearGradientStyle,
+        borderRadius: 0,
+      }}
       colors={["transparent", "#0C1420"]}
     />
   );

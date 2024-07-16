@@ -40,6 +40,7 @@ const RankContainer = styled.View`
 `;
 
 const RankText = styled.Text`
+  text-align: center;
   color: ${defaultColors.kodamaWhite};
   font-family: RobotoMedium;
   font-size: 12px;
