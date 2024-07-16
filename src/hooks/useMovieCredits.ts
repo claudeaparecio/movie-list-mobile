@@ -12,10 +12,8 @@ export const useMovieCredits = (id: number) => {
     try {
       const response = await get(movieCreditsUrl(id));
       const responseData = await response.json();
-      console.log(id, responseData.cast[0]);
       setData(responseData);
     } catch (error) {
-      console.log(error);
       setError(error);
     }
     setIsLoading(false);
