@@ -17,7 +17,10 @@ const containerHeight = height / 3.2;
 const posterHeight = containerHeight * 0.8;
 
 const BackgroundImage = styled.ImageBackground`
+  background-color: ${defaultColors.tristesse};
   height: ${posterHeight}px;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
   width: ${containerWidth}px;
   align-items: center;
   justify-content: center;
@@ -37,7 +40,6 @@ const RankContainer = styled.View`
   left: 0;
   z-index: 2;
   background-color: ${defaultColors.tristesse};
-  width: ${minimizedWidth}px;
   padding: 5px;
 `;
 
@@ -128,7 +130,7 @@ const MediumMovieCard = ({ movie, index, genres }: TopRatedMovieCardProps) => {
   };
 
   return (
-    <ContainerButton onPress={navigateToMovieDetails}>
+    <ContainerButton activeOpacity={1} onPress={navigateToMovieDetails}>
       <BackgroundImage
         imageStyle={{ borderTopLeftRadius: 7, borderTopRightRadius: 7 }}
         resizeMode={"cover"}

@@ -177,8 +177,8 @@ const LargeMovieCard = ({
   };
 
   return (
-    <Container style={{ width }}>
-      <TouchableOpacity onPress={_onSelect}>
+    <TouchableOpacity activeOpacity={1} onPress={_onSelect}>
+      <Container style={{ width }}>
         <BackgroundImage
           expanded={expanded}
           imageStyle={{ borderTopLeftRadius: 7, borderTopRightRadius: 7 }}
@@ -190,14 +190,14 @@ const LargeMovieCard = ({
           </RankContainer>
         </BackgroundImage>
         {!expanded && <Overlay />}
-      </TouchableOpacity>
-      {expanded && (
-        <>
-          {renderMovieInfo()}
-          {renderLinearGradient()}
-        </>
-      )}
-    </Container>
+        {expanded && (
+          <>
+            {renderMovieInfo()}
+            {renderLinearGradient()}
+          </>
+        )}
+      </Container>
+    </TouchableOpacity>
   );
 };
 

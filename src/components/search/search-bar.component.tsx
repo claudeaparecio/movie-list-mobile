@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 const Container = styled.View`
   margin: 16px;
   background-color: ${defaultColors.tristesse};
-  border-width: 1px;
+  border-width: 0.5px;
   border-color: ${defaultColors.kodamaWhite};
   border-radius: 30px;
   padding: 10px 20px;
@@ -57,6 +57,7 @@ const SearchBar = ({ triggerQuery, query, clearSearch }: SearchBarProps) => {
         onChangeText={setValue}
         autoCorrect={false}
         placeholder="Search movies..."
+        placeholderTextColor={defaultColors.kodamaWhite}
       />
       <Button onPress={_clearSearch}>
         <Icon name="close" size={20} color={defaultColors.kodamaWhite} />
