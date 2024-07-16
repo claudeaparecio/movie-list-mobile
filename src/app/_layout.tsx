@@ -14,6 +14,7 @@ export default function RootLayout() {
     RobotoBlack: require("../assets/fonts/Roboto-Black.ttf"),
     RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
     RobotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
+    RobotoLigthItalic: require("../assets/fonts/Roboto-LightItalic.ttf"),
     RobotoRegular: require("../assets/fonts/Roboto-Regular.ttf"),
   });
 
@@ -31,6 +32,7 @@ export default function RootLayout() {
     <StateProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="movie/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </StateProvider>

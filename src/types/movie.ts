@@ -1,4 +1,4 @@
-interface TopRatedMovie {
+interface Movie {
   adult: boolean;
   backdrop_path: string;
   id: number;
@@ -12,21 +12,19 @@ interface TopRatedMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-};
+  genre_ids: number[];
+}
 
 type Genre = {
-  id: number;
+  id?: number;
+  name?: string;
+};
+
+type SpokenLangues = {
   name: string;
 };
 
-type ProductionCompany = {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-};
-
-interface MovieDetails extends TopRatedMovie {
+interface MovieDetails extends Movie {
   budget: number;
   genres: Genre[];
   imdb_id: string;
@@ -36,11 +34,36 @@ interface MovieDetails extends TopRatedMovie {
   runtime: number;
   status: string;
   tagline: string;
+  spoken_languages: SpokenLangues[];
+  homepage: string;
+}
+
+type ProductionCompany = {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
 };
 
-interface TopRatedMovies {
+interface ApiResponse {
   page?: number;
-  results?: TopRatedMovie[];
+  results?: Movie[];
   total_pages?: number;
   total_results?: number;
-};
+}
+
+interface GenresResponse {
+  genres: Genre[];
+}
+
+interface Cast {
+  name: string;
+  profile_path: string;
+  character: string;
+  id: string;
+}
+
+interface CreditsApiResponse {
+  id: number;
+  cast: Cast[];
+}

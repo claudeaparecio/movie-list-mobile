@@ -1,11 +1,10 @@
 import { defaultColors } from "@/src/constants/styles";
 import styled from "styled-components/native";
-import TopRatedMovieCard from "./top-rated-movie-card.component";
 import { useEffect, useState } from "react";
+import LargeMovieCard from "./large-movie-card.component";
 
 const Container = styled.View`
-  margin: 10px 0px;
-  background-color: ${defaultColors.tristesse};
+  padding: 10px 0px;
   border-radius: 5px;
 `;
 
@@ -28,10 +27,16 @@ const SubHeader = styled.Text`
   margin-left: 10px;
 `;
 interface HeroHeaderProps {
-  topTenMovies?: TopRatedMovie[];
+  topTenMovies?: Movie[];
+  genres?: Genre[];
+  pauseAutoPlay: boolean;
 }
 
-const HeroHeader = ({ topTenMovies }: HeroHeaderProps) => {
+const HeroHeader = ({
+  topTenMovies,
+  genres,
+  pauseAutoPlay,
+}: HeroHeaderProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onSelect = (index: number) => {
@@ -40,12 +45,12 @@ const HeroHeader = ({ topTenMovies }: HeroHeaderProps) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((index) => (index === 9 ? 0 : (index += 1)));
+      if (!pauseAutoPlay) {
+        setActiveIndex((index) => (index === 9 ? 0 : (index += 1)));
+      }
     }, 5000);
-
     return () => clearInterval(interval);
-  }, [activeIndex]);
-
+  }, [activeIndex, pauseAutoPlay]);
 
   return (
     <Container>
@@ -54,11 +59,12 @@ const HeroHeader = ({ topTenMovies }: HeroHeaderProps) => {
       <ContentContainer>
         {topTenMovies?.map((movie, index) => {
           return (
-            <TopRatedMovieCard
+            <LargeMovieCard
+              genres={genres}
               onSelect={onSelect}
               key={`top.${index}.movie`}
               movie={movie}
-              expanded={index === activeIndex}
+              activeIndex={activeIndex}
               index={index}
             />
           );

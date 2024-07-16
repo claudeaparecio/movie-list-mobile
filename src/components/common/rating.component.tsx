@@ -8,19 +8,6 @@ const Container = styled.View`
   margin: 3px 0px;
 `;
 
-const Rating = styled.Text`
-  font-family: ${defaultFont.weight.bold};
-  font-size: 10px;
-  color: ${defaultColors.kodamaWhite};
-`;
-
-const Votes = styled.Text`
-  font-family: ${defaultFont.weight.medium};
-  font-size: 10px;
-  color: ${defaultColors.grayChateau};
-  margin-left: 2px;
-`;
-
 const Icon = styled(FontAwesome)`
   margin: 0px 2px;
 `;
@@ -28,13 +15,28 @@ const Icon = styled(FontAwesome)`
 interface MovieRatingProps {
   rating: number;
   votes: number;
+  size: "small" | "medium";
 }
 
-const MovieRating = ({ rating, votes }: MovieRatingProps) => {
+const MovieRating = ({ rating, votes, size = "small" }: MovieRatingProps) => {
+  const isSmall = size === "small";
+  const Rating = styled.Text`
+    font-family: ${defaultFont.weight.bold};
+    font-size: ${isSmall ? "10px" : "12px"};
+    color: ${defaultColors.kodamaWhite};
+  `;
+
+  const Votes = styled.Text`
+    font-family: ${defaultFont.weight.medium};
+    font-size: ${isSmall ? "10px" : "12px"};
+    color: ${defaultColors.grayChateau};
+    margin-left: 2px;
+  `;
+
   return (
     <Container>
       <Rating>{rating?.toFixed(1)}</Rating>
-      <Icon name="star" size={10} color="#FAA912" />
+      <Icon name="star" size={10} color={defaultColors.gold} />
       <Votes>({votes})</Votes>
     </Container>
   );

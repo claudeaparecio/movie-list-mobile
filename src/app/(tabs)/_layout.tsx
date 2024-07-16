@@ -1,27 +1,36 @@
-import { Tabs } from "expo-router";
 import React, { useContext, useEffect } from "react";
+import { Tabs } from "expo-router";
 
 import { TabBarIcon } from "@/src/components/common/tab-bar-icon.component";
 import { defaultColors, defaultFont } from "@/src/constants/styles";
 import { StateContext } from "@/src/context/state-context";
 import { useTopRatedMovies } from "@/src/hooks/useTopRatedMovies";
+import { useGenres } from "@/src/hooks/useGenres";
+import Loading from "@/src/components/common/loading.modal";
 
 const TabLayout = () => {
   const { page, setState } = useContext(StateContext);
-  const { isLoading: fetching, data, error } = useTopRatedMovies(page);
-  const topRatedMovies = data as TopRatedMovies | undefined;
+  const {
+    data: topRatedMovies,
+    isLoading: isFetchingMovies,
+  } = useTopRatedMovies(page);
+  const { data: genresData, isLoading: isFetchingGenres } = useGenres();
 
   useEffect(() => {
-    if (
-      !fetching &&
-      topRatedMovies?.results?.length &&
-      setState
-    ) {
+    if (!isFetchingMovies && topRatedMovies?.results?.length && setState) {
       setState({
         topRatedMovies: topRatedMovies,
       });
     }
-  }, [fetching]);
+  }, [isFetchingMovies]);
+
+  useEffect(() => {
+    if (!isFetchingGenres && topRatedMovies?.results?.length && setState) {
+      setState({
+        genres: genresData?.genres,
+      });
+    }
+  }, [isFetchingGenres]);
 
   const renderTabBarIcon = (
     focused: boolean,
@@ -36,6 +45,10 @@ const TabLayout = () => {
     );
   };
 
+  if (isFetchingGenres || isFetchingMovies) {
+    return <Loading />;
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -47,7 +60,6 @@ const TabLayout = () => {
         },
         tabBarStyle: {
           backgroundColor: defaultColors.tristesse,
-          borderTopWidth: 0,
         },
       }}
     >
@@ -66,14 +78,6 @@ const TabLayout = () => {
           title: "Search",
           tabBarIcon: ({ focused }) =>
             renderTabBarIcon(focused, "magnify", "magnify"),
-        }}
-      />
-      <Tabs.Screen
-        name="favorites-screen"
-        options={{
-          title: "Saved",
-          tabBarIcon: ({ focused }) =>
-            renderTabBarIcon(focused, "cards-heart", "cards-heart-outline"),
         }}
       />
     </Tabs>

@@ -4,36 +4,42 @@ import styled from "styled-components/native";
 import { gradientBackgroundStyle } from "@/src/constants/styles";
 import { SafeAreaView } from "react-native";
 
-const Container = styled.View`
+const Container = styled.View<{ backgroundColor?: string }>`
   flex: 1;
-  background-color: transparent;
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "transparent"};
 `;
 
 const ContentContainer = styled.View`
   height: 100%;
 `;
 
-type ScreenContainerProps = {
+interface ScreenContainerProps {
   children: React.ReactNode;
-};
+  safeView?: boolean;
+  backgroundColor?: string;
+}
 
-const ScreenContainer = ({ children }: ScreenContainerProps) => {
+const ScreenContainer = ({
+  children,
+  safeView = true,
+  backgroundColor,
+}: ScreenContainerProps) => {
   return (
-    <Container>
-      <LinearGradient
-        style={gradientBackgroundStyle}
-        colors={[
-          "#0C1420",
-          "#011A3C",
-          "#062C51",
-          "#234067",
-          "#3B547E",
-          "#3B547E",
-        ]}
-      />
-      <SafeAreaView>
+    <Container backgroundColor={backgroundColor}>
+      {!backgroundColor && (
+        <LinearGradient
+          style={gradientBackgroundStyle}
+          colors={["#0C1420", "#234067", "#062C51", "#011A3C", "#0C1420"]}
+        />
+      )}
+      {safeView ? (
+        <SafeAreaView>
+          <ContentContainer>{children}</ContentContainer>
+        </SafeAreaView>
+      ) : (
         <ContentContainer>{children}</ContentContainer>
-      </SafeAreaView>
+      )}
     </Container>
   );
 };

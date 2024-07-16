@@ -3,14 +3,13 @@ import { get } from "../api";
 import { topRatedMoviesUrl } from "../constants/request-urls";
 
 export const useTopRatedMovies = (page?: number) => {
-  const [data, setData] = useState<TopRatedMovies>();
+  const [data, setData] = useState<ApiResponse>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
 
   const fetchData = async (page?: number) => {
     setIsLoading(true);
     try {
-      console.log('CAlling api...', page)
       const response = await get(`${topRatedMoviesUrl}&page=${page}`);
       const responseData = await response.json();
       setData(responseData);

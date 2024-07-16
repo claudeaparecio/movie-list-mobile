@@ -20,10 +20,16 @@ export const getReleaseDate = (dateString: string) => {
   return {
     date: releaseDate,
     year,
-  }
+  };
 };
 
 export const getPercentage = (value: number) => {
   const percentage = value * 10;
-  return percentage.toFixed(1)
+  return percentage.toFixed(1);
+};
+
+export const getDuration = (minutes: number) => {
+  const minute = minutes % 60;
+  const hour = (minutes - minute) / 60;
+  return `${hour}h ${minute}m`;
 };

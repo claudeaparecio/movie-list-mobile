@@ -9,19 +9,20 @@ export const gradientBackgroundStyle: StyleProp<ViewStyle> = {
 };
 
 export const defaultColors = {
-  blueRuin : '#016FE0',
-  tristesse: '#0C1420',
-  kodamaWhite: '#E6F1FC',
-  electronBlue: '#6BACEE',
-  grayChateau: '#A8AAAB',
-  ligthGreen: '#36D07A',
+  blueRuin: "#016FE0",
+  tristesse: "#0C1420",
+  kodamaWhite: "#E6F1FC",
+  electronBlue: "#6BACEE",
+  grayChateau: "#A8AAAB",
+  ligthGreen: "#36D07A",
+  gold: "#FAA912",
 };
 
 export const defaultFont = {
   weight: {
-    regular: 'RobotoRegular',
-    medium: 'RobotoMedium',
-    bold: 'RobotoBold',
-    black: 'RobotoBlack',
-  }
+    regular: "RobotoRegular",
+    medium: "RobotoMedium",
+    bold: "RobotoBold",
+    black: "RobotoBlack",
+  },
 };
