@@ -2,11 +2,10 @@ import styled from "styled-components/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { defaultColors } from "@/src/constants/styles";
 import { router } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const Container = styled.View<{ top: number }>`
+const Container = styled.View<{ topInset: number }>`
   position: absolute;
-  top: ${(props) => props.top}px;
+  top: ${(props) => props.topInset}px;
   z-index: 3;
 `;
 
@@ -19,18 +18,18 @@ const Button = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-interface BackButtonProps {}
+interface BackButtonProps {
+  top: number;
+}
 
-const BackButton = ({}: BackButtonProps) => {
-  const { top } = useSafeAreaInsets();
-
+const BackButton = ({ top }: BackButtonProps) => {
   const _onBack = () => {
     router.back();
   };
 
   return (
-    <Container top={top}>
-      <Button onPress={_onBack}>
+    <Container topInset={top}>
+      <Button onPress={_onBack} testID="back-button">
         <Icon size={25} name="arrow-left" color={defaultColors.kodamaWhite} />
       </Button>
     </Container>

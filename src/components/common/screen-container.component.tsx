@@ -26,15 +26,16 @@ const ScreenContainer = ({
   backgroundColor,
 }: ScreenContainerProps) => {
   return (
-    <Container backgroundColor={backgroundColor}>
+    <Container testID="screen-container" backgroundColor={backgroundColor}>
       {!backgroundColor && (
         <LinearGradient
+          testID="linear-gradient"
           style={gradientBackgroundStyle}
           colors={["#0C1420", "#234067", "#062C51", "#011A3C", "#0C1420"]}
         />
       )}
       {safeView ? (
-        <SafeAreaView>
+        <SafeAreaView testID="safe-area-view">
           <ContentContainer>{children}</ContentContainer>
         </SafeAreaView>
       ) : (

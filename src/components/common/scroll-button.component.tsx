@@ -1,8 +1,7 @@
 import { defaultColors } from "@/src/constants/styles";
 import styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
-
-const FontAwesomeIcon = styled(FontAwesome)``;
+import { View } from "react-native";
 
 const ScrollToTopContainer = styled.View`
   position: absolute;
@@ -25,13 +24,15 @@ interface ScrollButtonProps {
 
 const ScrollButton = ({ scrollToTop }: ScrollButtonProps) => {
   return (
-    <ScrollToTopContainer>
-      <ScrollToTopButton onPress={scrollToTop}>
-        <FontAwesomeIcon
-          size={20}
-          name="arrow-up"
-          color={defaultColors.kodamaWhite}
-        />
+    <ScrollToTopContainer testID="scroll-to-top-container">
+      <ScrollToTopButton testID="scroll-to-top-button" onPress={scrollToTop}>
+        <View testID="font-awesome-icon">
+          <FontAwesome
+            size={20}
+            name="arrow-up"
+            color={defaultColors.kodamaWhite}
+          />
+        </View>
       </ScrollToTopButton>
     </ScrollToTopContainer>
   );

@@ -12,6 +12,19 @@ const Icon = styled(FontAwesome)`
   margin: 0px 2px;
 `;
 
+const Rating = styled.Text<{ isSmall: boolean }>`
+  font-family: ${defaultFont.weight.bold};
+  font-size: ${(props) => (props.isSmall ? "10px" : "12px")};
+  color: ${defaultColors.kodamaWhite};
+`;
+
+const Votes = styled.Text<{ isSmall: boolean }>`
+  font-family: ${defaultFont.weight.medium};
+  font-size: ${(props) => (props.isSmall ? "10px" : "12px")};
+  color: ${defaultColors.grayChateau};
+  margin-left: 2px;
+`;
+
 interface MovieRatingProps {
   rating: number;
   votes: number;
@@ -20,24 +33,12 @@ interface MovieRatingProps {
 
 const MovieRating = ({ rating, votes, size = "small" }: MovieRatingProps) => {
   const isSmall = size === "small";
-  const Rating = styled.Text`
-    font-family: ${defaultFont.weight.bold};
-    font-size: ${isSmall ? "10px" : "12px"};
-    color: ${defaultColors.kodamaWhite};
-  `;
-
-  const Votes = styled.Text`
-    font-family: ${defaultFont.weight.medium};
-    font-size: ${isSmall ? "10px" : "12px"};
-    color: ${defaultColors.grayChateau};
-    margin-left: 2px;
-  `;
 
   return (
     <Container>
-      <Rating>{rating?.toFixed(1)}</Rating>
-      <Icon name="star" size={10} color={defaultColors.gold} />
-      <Votes>({votes})</Votes>
+      <Rating isSmall={isSmall}>{rating?.toFixed(1)}</Rating>
+      <Icon testID="movie-rating-icon" name="star" size={10} color={defaultColors.gold} />
+      <Votes isSmall={isSmall}>({votes})</Votes>
     </Container>
   );
 };

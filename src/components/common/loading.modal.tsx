@@ -18,10 +18,11 @@ const Loading = () => {
   const animation = useRef<LottieView>(null);
 
   return (
-    <Modal transparent visible animationType="fade">
+    <Modal testID="loading-modal" transparent visible animationType="fade">
       <Container>
         <ContentContainer>
           <LottieView
+            testID="loading-animation"
             autoPlay
             ref={animation}
             style={{
