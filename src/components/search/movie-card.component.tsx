@@ -29,6 +29,7 @@ const Title = styled.Text`
 `;
 
 const PosterImage = styled.Image`
+  background-color: ${defaultColors.tristesse};
   border-radius: 7px;
   height: ${posterHeight}px;
   width: ${posterWidth}px;
