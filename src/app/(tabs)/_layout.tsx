@@ -6,7 +6,7 @@ import { defaultColors, defaultFont } from "@/src/constants/styles";
 import { StateContext } from "@/src/context/state-context";
 import { useTopRatedMovies } from "@/src/hooks/useTopRatedMovies";
 import { useGenres } from "@/src/hooks/useGenres";
-import Loading from "@/src/components/common/loading.modal";
+import LoadingModal from "@/src/components/common/loading.modal";
 
 const TabLayout = () => {
   const { page, setState } = useContext(StateContext);
@@ -46,7 +46,7 @@ const TabLayout = () => {
   };
 
   if (isFetchingGenres || isFetchingMovies) {
-    return <Loading />;
+    return <LoadingModal />;
   }
 
   return (

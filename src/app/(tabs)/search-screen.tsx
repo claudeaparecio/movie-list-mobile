@@ -7,7 +7,7 @@ import { useSearchMovies } from "@/src/hooks/useSearchMovies";
 
 const SearchScreen = () => {
   const { searchResults, setState, topRatedMovies } = useContext(StateContext);
-  const { data, isLoading, submitQuery, isLoadingMore } = useSearchMovies();
+  const { data, isFetching, submitQuery, isLoadingMore } = useSearchMovies();
   const topTenMovies = topRatedMovies?.results?.slice(0, 10);
   const currentPage = searchResults?.page ?? 0;
   const movieResults = searchResults?.results ?? [];
@@ -20,12 +20,12 @@ const SearchScreen = () => {
   const initialSearch = totalPages === 0 && totalResult === 0;
 
   useEffect(() => {
-    if (!isLoading && setState) {
+    if (!isFetching && setState) {
       setState({
         searchResults: data,
       });
     }
-  }, [isLoading]);
+  }, [isFetching]);
 
   const clearSearch = () => {
     submitQuery("");
@@ -55,6 +55,7 @@ const SearchScreen = () => {
         clearSearch={clearSearch}
         isEndOfResult={isEndOfResult}
         isLoadingMore={isLoadingMore}
+        isFetching={isFetching}
         submitQuery={submitQuery}
         movieResults={movieResults}
         page={page}

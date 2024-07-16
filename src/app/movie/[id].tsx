@@ -1,5 +1,5 @@
 import BackButton from "@/src/components/common/back-button.component";
-import Loading from "@/src/components/common/loading.modal";
+import LoadingModal from "@/src/components/common/loading.modal";
 import ScreenContainer from "@/src/components/common/screen-container.component";
 import MovieDetails from "@/src/components/movie-details";
 import { defaultColors } from "@/src/constants/styles";
@@ -18,7 +18,7 @@ const MovieDetailsScreen = () => {
   );
 
   if (isFetchingMovie || isFetchingCredits) {
-    return <Loading />;
+    return <LoadingModal />;
   }
 
   return (

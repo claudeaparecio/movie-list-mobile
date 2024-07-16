@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import LoadingComponent from "../common/loading.component";
 
 const Container = styled.View`
   flex: 1;
@@ -83,6 +84,10 @@ const NoResultLabel = styled.Text`
   margin: 16px 0px;
 `;
 
+const LoadingContainer = styled.View`
+  flex: 1;
+`;
+
 interface SearchProps {
   submitQuery: (value: string, page?: number) => void;
   clearSearch: () => void;
@@ -94,6 +99,7 @@ interface SearchProps {
   page: number;
   movieResults?: Movie[];
   suggestedMovies?: Movie[];
+  isFetching: boolean;
 }
 
 const Search = ({
@@ -106,6 +112,7 @@ const Search = ({
   suggestedMovies,
   clearSearch,
   initialSearch,
+  isFetching,
   noResult,
 }: SearchProps) => {
   const [scrollPosition, setScrollPosition] = useState(-1);
@@ -154,7 +161,13 @@ const Search = ({
     });
   };
 
+  const renderLoading = () => (
+    <LoadingContainer>
+      <LoadingComponent transparent />
+    </LoadingContainer>
+  );
   const renderResults = () => {
+    if (isFetching) return renderLoading();
     return (
       <ResultsList
         ref={scrollRef}
@@ -214,8 +227,8 @@ const Search = ({
           query={query}
           triggerQuery={triggerQuery}
         />
-        {noResult && <NoResultLabel>{noResultLabel}</NoResultLabel>}
-        <ResultLabel>{resultLabel}</ResultLabel>
+        {noResult && !isFetching && <NoResultLabel>{noResultLabel}</NoResultLabel>}
+        {!isFetching && <ResultLabel>{resultLabel}</ResultLabel>}
         {renderResults()}
         {showScrollToTop && <ScrollButton scrollToTop={scrollToTop} />}
       </Container>
